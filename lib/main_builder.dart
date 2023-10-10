@@ -30,22 +30,26 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: ChangeNotifierProvider<Counter>(
-          create: (context) => Counter(),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('${context.watch<Counter>().counter}'),
-              SizedBox(height: 20.0),
-              ElevatedButton(
-                child: Text(
-                  'Increment',
-                  style: TextStyle(fontSize: 20.0),
-                ),
-                onPressed: () {
-                  context.read<Counter>().increment();
-                },
-              ),
-            ],
+          create: (_) => Counter(),
+          child: Builder(
+            builder: (context) {
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('${context.watch<Counter>().counter}'),
+                  SizedBox(height: 20.0),
+                  ElevatedButton(
+                    child: Text(
+                      'Increment',
+                      style: TextStyle(fontSize: 20.0),
+                    ),
+                    onPressed: () {
+                      context.read<Counter>().increment();
+                    },
+                  ),
+                ],
+              );
+            },
           ),
         ),
       ),
